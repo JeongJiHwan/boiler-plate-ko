@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}));
 
 //application/json
 app.use(express.json());
-
+app.use(cookieParser())
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI, {
     useNewUrlParser:true, useUnifiedTopology: true
@@ -60,7 +60,7 @@ app.post('/api/users/login', (req, res) => {
     // 비밀번호가 맞다면 토큰 생성하기
     user.generateToken((err, user) => {
         if(err) return res.status(400).send(err);
-
+        
         // 토큰을 저장한다. 어디에... 쿠키, 로컬스토리지 등...
         res.cookie("x_auth", user.token)
         .status(200)
@@ -69,7 +69,7 @@ app.post('/api/users/login', (req, res) => {
   })  
 })
 
-app.get('/api/user/auth', auth, (req, res) => {
+app.get('/api/users/auth', auth, (req, res) => {
   // 여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication 이 True 라는 말.
   res.status(200).json({
     _id: req.user._id,
@@ -81,6 +81,13 @@ app.get('/api/user/auth', auth, (req, res) => {
     role: req.user.role,
     image: req.user.image
   })
+})
+
+app.get('/api/users/logout', auth, (req, res) => {
+  User.findOneAndUpdate({_id: req.user._id}, {token: ""}, (err, user) => {
+      if(err) return res.json({success: false, err});
+      return res.status(200).send({success:true})
+    })
 })
 
 app.listen(port, () => {
