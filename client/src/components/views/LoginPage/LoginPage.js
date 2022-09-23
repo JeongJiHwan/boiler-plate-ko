@@ -30,7 +30,7 @@ function LoginPage(props) {
                 if (response.payload.loginSuccess){
                     navigate('/')
                 } else{
-                    alert('Error')
+                    alert('Failed to sign in')
                 }
             })
         
