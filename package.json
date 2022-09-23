@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "devStart": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js",
+    "devStart": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "concurrently \"npm run devStart\" \"npm run start --prefix client\""
   },
   "author": "jeong-jihwan",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^7.4.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
