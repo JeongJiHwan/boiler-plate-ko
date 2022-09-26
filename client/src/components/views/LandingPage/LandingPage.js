@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 function LandingPage() {
     const navigate = useNavigate();
+    
     useEffect(() => {
         axios.get('/api/hello')
         .then(response => { console.log(response)})

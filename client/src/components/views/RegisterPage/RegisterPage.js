@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../../../_actions/user_action';
 import { useNavigate } from 'react-router-dom'
 
-function RegisterPage(props) {
+function RegisterPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -19,10 +19,10 @@ function RegisterPage(props) {
         setName(event.currentTarget.value)
     }
     const onPasswordHandler = (event) => {
-      setPassword(event.currentTarget.value)
+        setPassword(event.currentTarget.value)
     }
     const onConfirmPasswordHandler = (event) => {
-      setConfirmPassword(event.currentTarget.value)
+        setConfirmPassword(event.currentTarget.value)
     }
 
     const onSubmitHandler = (event) => {
